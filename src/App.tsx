@@ -1,34 +1,33 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 interface Persona {
-  id: number
-  nombre: string
-  apellido: string
-  direccion: string
+  id: number;
+  nombre: string;
+  apellido: string;
+  direccion: string;
 }
 
 function App() {
-  const [personas, setPersonas] = useState<Persona[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [personas, setPersonas] = useState<Persona[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    //fetch('https://micropersonasbackend.onrender.com/api/personas')
-    fetch('http://localhost:8080/api/personas')
+    fetch("https://micropersonas.onrender.com/api/personas")
       .then((res) => res.json())
       .then((data) => {
-        setPersonas(data)
-        setLoading(false)
+        setPersonas(data);
+        setLoading(false);
       })
       .catch((err) => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
-  if (loading) return <p>Cargando...</p>
-  if (error) return <p>Error: {error}</p>
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="container">
@@ -54,7 +53,7 @@ function App() {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
